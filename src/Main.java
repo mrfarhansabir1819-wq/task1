@@ -1,15 +1,57 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.TreeSet;
+
+class LibraryManager {
+    private TreeSet<String> books = new TreeSet<>();
+
+    public void addBook(String title) {
+        books.add(title);
+    }
+
+    public void removeBook(String title) {
+        books.remove(title);
+    }
+    public boolean isBookAvailable(String title) {
+        return books.contains(title);
+    }
+    public void displayAllBooks() {
+        System.out.println("Books in Library:");
+        for (String book : books) {
+            System.out.println(book);
+        }
+    }
+    public void displayBooksStartingWith(char letter) {
+        System.out.println("Books starting with '" + letter + "':");
+
+        for (String book : books) {
+            if (book.startsWith(String.valueOf(letter))) {
+                System.out.println(book);
+            }
+        }
+    }
+}
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        LibraryManager library = new LibraryManager();
+
+        library.addBook("Java Programming");
+        library.addBook("Data Structures");
+        library.addBook("Operating Systems");
+        library.addBook("Computer Networks");
+        library.addBook("Java Programming");
+
+        library.displayAllBooks();
+
+        System.out.println("\nAvailable? "
+                + library.isBookAvailable("Data Structures"));
+
+        library.removeBook("Operating Systems");
+
+        System.out.println("\nAfter Removing:");
+        library.displayAllBooks();
+
+        System.out.println();
+        library.displayBooksStartingWith('J');
     }
 }
